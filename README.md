@@ -6,6 +6,7 @@ To use this, ensure that
 1. Nvim
 2. Cmake
 3. Cargo
+4. clang-format
 
 are installed. The setup of other required nvim dependencies are taken care of internally.
 
