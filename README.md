@@ -19,4 +19,6 @@ We know that for Rust, the ``cargo new`` command exists, immediately after which
 
 Run this bash script (after setting execution permissions with ``chmod +x setup_project.sh``), passing in the project name. Once done, you can fire nvim to start editing source files. Clangd would then have everything it needs to start helping you in your development. One final thing to keep in mind is that as new source files are added/removed, the CmakeLists.txt file needs to be updated, and the cmake command needs to be run again.
 
+Finally, note that clangd embeds clang-format by default. One approach to formatting C/C++ would therefore be to create keybindings that trigger the autoformatter in clangd. However, the problem here is that if we want a different code style formatting (default is google), we would need to include a .clang-format file in the project root. And its tedious to write one without clang-format installed. Hence the decision to require the installation of clang-format here. That way we can also use vim plugins to directly trigger buffer formatting easily.
+
 More plugins would be added in the future.
