@@ -1,3 +1,4 @@
+local cargo_home = os.getenv("HOME") .. "/.cargo"
 return {
 	"neovim/nvim-lspconfig",
 	dependencies = 
@@ -19,7 +20,7 @@ return {
    	config = function()
 		require("lspconfig").clangd.setup{}
 		require("lspconfig").rust_analyzer.setup{
-			cmd = { "/home/srivatsan/.cargo/bin/rust-analyzer" },
+			cmd = {cargo_home .. "/bin/rust-analyzer"},
 		}		
    	end,
 }
