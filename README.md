@@ -12,7 +12,7 @@ are installed. The setup of other required nvim dependencies are taken care of i
 
 Copy the nvim folder to your .config directory and start using nvim.
 
-We know that for Rust, the ``cargo new`` command exists, immediately after which rust-analyzer will start analyzing your code semantics. Setting up a C/C++ project with cmake  so that clangd can start doing its thing requires writing some tedious boiler plate code, as clangd requires a specifically named json file in the project directory. Therefore, a bash script, named ``setup_project.sh`` is included to automate the writing of this boiler plate. It takes one commandline argument which is the name of the new C/C++/CUDA project. It does the following actions:
+We know that for Rust, the ``cargo new`` command automatically creates a skeleton project, immediately after which rust-analyzer will start analyzing your code semantics. Setting up a similar skeletal project for C/C++ with cmake  so that clangd can start doing its thing requires writing some tedious boiler plate code. This is because clangd requires a specifically named json file in the project root directory. Therefore, the ``setup_project.sh`` script is included to automate the writing of this boiler plate. It takes one commandline argument which is the name of the new C/C++/CUDA project. It does the following actions:
 
 1. Create include and source directories.
 2. Run cmake to create the ``compile_commands.json`` file required by clangd. 
