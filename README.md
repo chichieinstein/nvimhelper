@@ -1,4 +1,4 @@
-# mynvimplugins
+# nvimhelper
 This repo contains lua files that help setup Neovim for development in Rust and C++. Features include code autoformatting, code completion, git integration and error highlighting.
 
 To use this, ensure that
