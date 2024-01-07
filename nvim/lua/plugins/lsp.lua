@@ -12,13 +12,15 @@ return {
    						},	   
    				config = function()
 					 require("mason-lspconfig").setup({
-	   				 ensure_installed = {"rust_analyzer", "clangd"}
+	   				 ensure_installed = {"clangd"}
 					 })
    				end,
    			},
    	config = function()
 		require("lspconfig").clangd.setup{}
-		require("lspconfig").rust_analyzer.setup{}		
+		require("lspconfig").rust_analyzer.setup{
+			cmd = { "/home/srivatsan/.cargo/bin/rust-analyzer" },
+		}		
    	end,
 }
 
