@@ -19,6 +19,6 @@ For editing C/C++/CUDA files, the aim is to integrate the Cmake build system wit
 
 Run this bash script (after setting execution permissions with ``chmod +x setup_project.sh``), passing in the project name. One thing to keep in mind is that as new source files are added/removed, the CmakeLists.txt file needs to be updated, and the cmake command needs to be run again.
 
-Finally, note that while clangd embeds clang-format by default, if we want a different code style formatting from the default is google style, we would need to include a .clang-format file in the project root which is tedious to write without a ``clang-format`` installed. Hence the decision to require the installation of ``clang-format`` here. That way we can also use vim plugins to directly trigger buffer formatting.
+Finally, note that while ``clangd`` embeds ``clang-format`` by default, if we want a different code style formatting from the default (google style), we would need to include a ``.clang-format`` file in the project root which is tedious to write without a ``clang-format`` installed. Hence the decision here to require the installation of ``clang-format``. That way we can also use vim plugins to directly trigger buffer formatting.
 
 More plugins would be added in the future.
