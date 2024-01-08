@@ -11,6 +11,7 @@ To use this, ensure that
 2. Cmake
 3. Cargo
 4. clang-format
+
 are installed. The setup of other required nvim dependencies are taken care of internally. The LSP lua module assumes that Cargo has been installed in the default location ``$HOME/.cargo``. If that is not the case for you, modify the ``cargo_home`` variable in the ``nvim/lua/plugins/lsp.lua`` file.
 
 Copy the nvim folder to your ``.config`` directory and start using nvim.
