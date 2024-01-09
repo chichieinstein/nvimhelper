@@ -12,7 +12,7 @@ To use this, ensure that
 3. Cargo
 4. clang-format
 
-are installed. The setup of other required nvim dependencies are taken care of internally. If that is not the case for you, modify the ``cargo_home`` variable in the ``nvim/lua/plugins/lsp.lua`` file. Ensure that ``$CARGO_HOME`` env variable is set to point to the cargo installation directory in your system.
+are installed. The setup of other required nvim dependencies are taken care of internally. Ensure that ``$CARGO_HOME`` env variable is set to point to the cargo installation directory in your system.
 
 Copy the nvim folder to your ``.config`` directory and start using nvim.
 
