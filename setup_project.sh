@@ -1,11 +1,13 @@
 #!/usr/bin/bash
 
 project_name=$1
+home_directory=$2
+
 cmake_file="CMakeLists.txt"
+mkdir -p "$home_directory"
+mkdir -p "$home_directory/$project_name"
 
-mkdir -p "$project_name"
-
-cd "$project_name"
+cd "$home_directory/$project_name"
 
 mkdir -p "src" && mkdir -p "include"
 
