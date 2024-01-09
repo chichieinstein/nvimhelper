@@ -1,4 +1,4 @@
-local cargo_home = os.getenv("HOME") .. "/.cargo"
+local cargo_home = os.getenv("CARGO_HOME")
 return {
 	"neovim/nvim-lspconfig",
 	dependencies = 
