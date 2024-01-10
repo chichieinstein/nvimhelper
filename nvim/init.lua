@@ -21,12 +21,14 @@ local opt = vim.o
 
 -- Display diagnostics in a non-focusable floating window
 local function show_line_diagnostics()
+    if vim.api.nvim_get_mode().mode ~= 'i' then
   	vim.diagnostic.open_float(nil, {
     	    scope = "line",
     	    focusable = false,
     	    width = 60,
     	    height = 20,
  })
+ end
 end
 
 -- Show line diagnostics on CursorHold
