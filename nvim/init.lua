@@ -1,5 +1,6 @@
+-- Set Leader
+vim.g.mapleader = " "
 -- Add lazy.nvim package for managing plugins
-
 -- Check to see if lazy.nvim exists already
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
@@ -36,12 +37,6 @@ vim.api.nvim_create_autocmd("CursorHold", {
     callback = show_line_diagnostics
 })
 
--- Close floating window on CursorMove and CursorMoveI
--- vim.api.nvim_create_autocmd({"CursorMoved", "CursorMoved"}, {
---   callback = function()
---      vim.lsp.util.close_preview_autocmd({},vim.api.nvim_get_current_buf())
---   end
---})
 -- Set line numbers 
 opt.number = true
 
@@ -57,11 +52,34 @@ vim.diagnostic.config({
    virtual_text = false,
 })
 
--- Show all diagnostics in current line in a floating window. 
+
 -- CursorHold event happens after `updatetime` milliseconds.
--- vim.cmd('autocmd CursorHold * lua vim.diagnostic.open_float({scope="line"})')
 opt.updatetime = 300
 
 -- Enable colorscheme
 vim.cmd('colorscheme tokyonight')
+
+local builtin = require("telescope.builtin")
+-- Keybindings
+--
+-- Map function
+function Map(mode, lhs, rhs, opts)
+	local options = { noremap = true, silent = true}
+	if opts then 
+		options = vim.tbl_extend("force", options, opts)
+	end
+	vim.keymap.set(mode, lhs, rhs, options)
+    end
+
+
+-- Create a vertically split window in Normal mode
+Map("n", "<A-w>", "<C-w>v")
+
+-- Traverse windows
+Map("n", "<C-h>", "<C-w>h")
+Map("n", "<C-l>", "<C-w>l")
+
+
+
+
 
