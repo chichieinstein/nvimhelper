@@ -79,7 +79,8 @@ Map("n", "<A-w>", "<C-w>v")
 Map("n", "<C-h>", "<C-w>h")
 Map("n", "<C-l>", "<C-w>l")
 
-
+-- Find files
+Map("n", "<leader>ff", builtin.find_files, {})
 
 
 
