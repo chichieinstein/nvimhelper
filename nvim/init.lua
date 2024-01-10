@@ -19,6 +19,27 @@ if not vim.loop.fs_stat(lazypath) then
 require("lazy").setup("plugins")
 local opt = vim.o
 
+-- Display diagnostics in a non-focusable floating window
+local function show_line_diagnostics()
+  	vim.diagnostic.open_float(nil, {
+    	    scope = "line",
+    	    focusable = false,
+    	    width = 60,
+    	    height = 20,
+ })
+end
+
+-- Show line diagnostics on CursorHold
+vim.api.nvim_create_autocmd("CursorHold", {
+    callback = show_line_diagnostics
+})
+
+-- Close floating window on CursorMove and CursorMoveI
+-- vim.api.nvim_create_autocmd({"CursorMoved", "CursorMoved"}, {
+--   callback = function()
+--      vim.lsp.util.close_preview_autocmd({},vim.api.nvim_get_current_buf())
+--   end
+--})
 -- Set line numbers 
 opt.number = true
 
@@ -32,13 +53,12 @@ opt.mouse = 'a'
 vim.diagnostic.config({
    update_on_insert = false,
    virtual_text = false,
-   virtual_lines = { only_current_line = true } 
-   })
+})
 
 -- Show all diagnostics in current line in a floating window. 
 -- CursorHold event happens after `updatetime` milliseconds.
 -- vim.cmd('autocmd CursorHold * lua vim.diagnostic.open_float({scope="line"})')
--- opt.updatetime = 300
+opt.updatetime = 300
 
 -- Enable colorscheme
 vim.cmd('colorscheme tokyonight')
