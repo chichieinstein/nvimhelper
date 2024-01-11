@@ -17,7 +17,12 @@ are installed. The setup of other required nvim dependencies are taken care of i
 
 Copy the nvim folder to your ``.config`` directory and start using nvim.
 
-For editing C/C++/CUDA files, the aim is to integrate the Cmake build system with the Clangd LSP. The ``setup_project.sh`` script is included to facilitate this integration by automating the writing of the boiler plate that is needed to directly start using Clangd with Neovim in the project directory. It takes one commandline argument which is the name of the new C/C++/CUDA project. It does the following actions:
+For editing C/C++/CUDA files, the aim is to integrate the Cmake build system with the Clangd LSP. The ``setup_project.sh`` script is included to facilitate this integration by automating the writing of the boiler plate that is needed to directly start using Clangd with Neovim in the project directory. It takes two commandline arguments:
+
+1. The name of the new C/C++/CUDA project.
+2. The directory which will contain the project.
+
+It does the following actions:
 
 1. Create include and source directories.
 2. Run cmake to create the ``compile_commands.json`` file required by clangd. 
