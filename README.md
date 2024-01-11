@@ -4,13 +4,14 @@ This repo contains lua files that help setup Neovim for development in Rust and 
 1. Code autoformatting 
 2. Code completion 
 3. Error highlighting 
-4. Git integration
+4. Type hints
 
 To use this, ensure that 
 1. Nvim
 2. Cmake
 3. Cargo
 4. clang-format
+5. rip-grep
 
 are installed. The setup of other required nvim dependencies are taken care of internally. Ensure that ``$CARGO_HOME`` env variable is set to point to the cargo installation directory in your system.
 
