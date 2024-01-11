@@ -37,6 +37,18 @@ vim.api.nvim_create_autocmd("CursorHold", {
     callback = show_line_diagnostics
 })
 
+-- Show inlay hints in insert mode:
+vim.api.nvim_create_autocmd({"InsertEnter"},{
+	callback = function() vim.lsp.inlay_hint.enable(0, true)
+	end,
+})
+
+-- Remove inlay hints when leaving Insert mode:
+vim.api.nvim_create_autocmd({"InsertLeave"},{
+	callback = function() vim.lsp.inlay_hint.enable(0, false)
+	end,
+})
+
 -- Set line numbers 
 opt.number = true
 
