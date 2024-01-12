@@ -66,7 +66,6 @@ vim.api.nvim_create_autocmd({"InsertLeave"},{
 end,
 })
 
-	
 -- Set line numbers 
 opt.number = true
 
