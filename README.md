@@ -7,7 +7,7 @@ This repo contains lua files that help setup Neovim for development in Rust and 
 4. Type hints
 
 To use this, ensure that 
-1. Nvim
+1. Nvim (version 0.10.0, as that is the only thing allowing inlay hints).
 2. Cmake
 3. Cargo
 4. clang-format
