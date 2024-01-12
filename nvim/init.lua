@@ -38,34 +38,28 @@ vim.api.nvim_create_autocmd("CursorHold", {
 })
 
 -- Check if a client is attached 
-local client = vim.lsp.get_clients()[1]
-
--- Boolean that tracks client capabilities 
-local hintcap = false
-
--- If client exists, set hintcap to true if server can provide inlay hints 
-if client ~= nil then
-	hintcap = client.server_capabilities.inlayHintProvider
+-- If so, toggle inlay hints, if the attached server allows it
+local function toggle_hints()
+   local client = vim.lsp.get_clients({bufnr=0})[1]
+   if client then
+	if client.server_capabilities.inlayHintProvider then
+	   local enabled = vim.lsp.inlay_hint.is_enabled()
+	   vim.lsp.inlay_hint.enable(0, not enabled)
+   	end
+   end
 end
 
--- Show inlay hints in insert mode if hintcap is true:
+-- If client exists, toggle inlay hints to visible if possible
 vim.api.nvim_create_autocmd({"InsertEnter"},{
-	callback = function() 
-	if hintcap then
-		vim.lsp.inlay_hint.enable(0, true)
-	end
-end,
+	callback = toggle_hints
 })
 
--- Remove inlay hints when leaving Insert mode if hintcap is true:
+-- Remove inlay hints when leaving Insert mode if possible:
 vim.api.nvim_create_autocmd({"InsertLeave"},{
-	callback = function() 
-	if hintcap then
-		vim.lsp.inlay_hint.enable(0, false)
-	end
-end,
+	callback = toggle_hints
 })
 
+	
 -- Set line numbers 
 opt.number = true
 
