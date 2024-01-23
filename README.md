@@ -7,16 +7,17 @@ This repo contains lua files that help setup Neovim for development in Rust and 
 4. Diagnostics in non-insert mode in floating non-focusable windows
 5. Type hints in insert mode
 
-Currently supported languages are C, C++, CUDA, Rust. More languages come in the future.
+Currently supported languages are C, C++, CUDA, Rust. More languages will be supported in the future.
 
 To ensure smooth operation of neovim, ensure that the following depndencies are met 
+
 1. Nvim (version 0.10.0, as that is the only version of Nvim currently allowing inlay hints).
 2. Cmake
 3. Cargo
 4. clang-format
 5. rip-grep
 
-Further, ensure that your terminal has been configured to display at least on of the Nerd Fonts (I personally like FiraCode).The setup of other required nvim dependencies are taken care of internally. Please ensure that the ``$CARGO_HOME`` env variable is set to point to the cargo installation directory in your system.
+Further, ensure that your terminal has been configured to display at least one of the Nerd Fonts (I personally like FiraCode).The setup of other required nvim dependencies is taken care of internally. Please ensure that the ``$CARGO_HOME`` env variable is set to point to the cargo installation directory in your system.
 
 Once these dependencies are met, setup is remarkably simple: copy the nvim folder to your ``.config`` directory and that is it! Start using nvim.
 
