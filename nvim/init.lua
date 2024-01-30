@@ -82,7 +82,6 @@ opt.updatetime = 300
 -- Enable colorscheme
 vim.cmd('colorscheme tokyonight')
 
-local builtin = require("telescope.builtin")
 -- Keybindings
 --
 -- Map function
@@ -94,6 +93,32 @@ function Map(mode, lhs, rhs, opts)
 	vim.keymap.set(mode, lhs, rhs, options)
     end
 
+-- Telescope/nvimtree integration
+local builtin = require("telescope.builtin")
+local treelib = require("nvim-tree.lib")
+
+-- Find files in current directory (ff - find files)
+Map("n", "<leader>ff", builtin.find_files, {})
+
+-- Perform live grep on NvimTree buffer if it exists(tt - traverse tree)
+Map("n", "<leader>tt", function()
+	local node = treelib.get_node_at_cursor()
+	if node then 
+		builtin.live_grep({ search_dirs = {node.absolute_path} })
+	else 
+		print("Not in nvim-tree, or no node selected")
+	end 
+end, {})
+
+-- Perform find files on NvimTree buffer if it exists(sd - search directory)
+Map("n", "<leader>sd", function()
+	local node = treelib.get_node_at_cursor()
+	if node then 
+		builtin.find_files({ search_dirs = {node.absolute_path} })
+	else 
+		print("Not in nvim-tree, or no node selected")
+	end 
+end, {})
 
 -- Create a vertically split window in Normal mode
 Map("n", "<A-w>", "<C-w>v")
@@ -102,8 +127,6 @@ Map("n", "<A-w>", "<C-w>v")
 Map("n", "<C-h>", "<C-w>h")
 Map("n", "<C-l>", "<C-w>l")
 
--- Find files
-Map("n", "<leader>ff", builtin.find_files, {})
 
 
 
