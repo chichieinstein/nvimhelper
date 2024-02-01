@@ -52,13 +52,13 @@ For Rust editing, `cargo` already ships with `rust-analyzer` and `rustfmt`. Enab
 |-----------|----------|---------------------|
 |`<Alt><w>`|`Normal`|Open Split Window to the right |   
 |`<Ctrl><h>`|`Normal`|Move to an existing left window|
-|`<Ctrl><l>`|`Normal`|Move to an existing right wndow |
+|`<Ctrl><l>`|`Normal`|Move to an existing right window |
 |`<Space><ff>`|`Normal`|FileSearch in the current directory|
+|`<Space><F>`|`Normal`|Format the buffer according to filetype|
+|`<Space><p>`|`Normal`|Display preview for Markdown files|
 |`<Space><op>`|`Normal`|Open an NvimTree buffer|
 |`<Space><sd>`|`Normal`|FileSearch under cursor in NvimTree buffer|
 |`<Space><tt>`|`Normal`|LiveGrep under cursor in NvimTree buffer|
 |`<Space><x>`|`Normal`|Close an open NvimTree buffer|
-|`<Space><F>`|`Normal`|Format the buffer according to filetype|
-|`<Space><p>`|`Normal`|Display preview for Markdown files|
 
 Another neat thing that has been achieved here is an integration of `NvimTree` with `Telescope`. This means that LiveGrep, as well as FileSearch can be done very easily in the NvimTree tab, as can be seen in the last four keybindings above. 
