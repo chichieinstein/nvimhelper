@@ -1,9 +1,8 @@
 return {
-    "ellisonleao/glow.nvim",
-	cmd = "Glow",
-	config=function()
-	    require('glow').setup({
-
-	})
+    "iamcco/markdown-preview.nvim",
+	cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+	ft = { "markdown" },
+	build=function()
+	    vim.fn["mkdp#util#install"]()
     end
 }
