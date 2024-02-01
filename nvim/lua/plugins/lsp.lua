@@ -83,7 +83,8 @@ return {
 		require("lspconfig").rust_analyzer.setup{
 			cmd = {cargo_home .. "/bin/rust-analyzer"},
 			capabilities = capabilities
-		}		
+		}
+		require("lspconfig").marksman.setup{}
    	end,
 }
 

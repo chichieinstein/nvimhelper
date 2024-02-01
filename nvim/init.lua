@@ -58,7 +58,6 @@ vim.api.nvim_create_autocmd({"InsertEnter"},{
 vim.api.nvim_create_autocmd({"InsertLeave"},{
 	callback = toggle_hints
 })
-
 	
 -- Set line numbers 
 opt.number = true
@@ -82,6 +81,9 @@ opt.updatetime = 300
 -- Enable colorscheme
 vim.cmd('colorscheme tokyonight')
 
+require('lualine').setup {
+	options = { theme = 'tokyonight' },
+}
 -- Keybindings
 --
 -- Map function
@@ -120,9 +122,12 @@ Map("n", "<leader>sd", function()
 	end 
 end, {})
 
+-- Open and Close NvimTree 
+Map("n", "<leader>op", ":NvimTreeOpen<CR>", {})
+Map("n", "<leader>x", ":NvimTreeClose<CR>", {})
+
 -- Create a vertically split window in Normal mode
 Map("n", "<A-w>", "<C-w>v")
-
 -- Traverse windows
 Map("n", "<C-h>", "<C-w>h")
 Map("n", "<C-l>", "<C-w>l")
