@@ -1,4 +1,4 @@
-## nvimhelper
+# nvimhelper
 Welcome to `nvimhelper`, a basic NeoVim config template that illustrates how to use `Lua` for setting up a terminal based IDE-like environment powered by the NeoVim ecosystem. If you like what you see here, please star :). Supported features include 
 
 1. Code Formatting 
@@ -21,7 +21,7 @@ Currently supported languages are C, C++, CUDA, Rust and Markdown. More language
 7. One of the NerdFonts installed and terminal configured to dispay it.
 8. (Optional) Use a good terminal emulator like `kitty` or `alacritty` for the best rendering of the statuslines.
 
-The setup of other required NeoVim dependencies is taken care of internally. Once all these dependencies are met, setup is remarkably simple: copy the nvim folder to your `.config` directory and that is it! Start using nvim. 
+The setup of required NeoVim plugins is taken care of internally. Once all these dependencies are satisfied, using the config is remarkably simple: copy the nvim folder to your `.config` directory and that is it! Start using nvim with these settings. 
 
 We next describe the specific language editing features and other requirements in detail.
 
@@ -57,6 +57,8 @@ For Rust editing, `cargo` already ships with `rust-analyzer` and `rustfmt`. Enab
 |`<Space><op>`|`Normal`|Open an NvimTree buffer|
 |`<Space><sd>`|`Normal`|FileSearch under cursor in NvimTree buffer|
 |`<Space><tt>`|`Normal`|LiveGrep under cursor in NvimTree buffer|
-|`<Space><x>`|`Normal` |Close an open NvimTree buffer|
+|`<Space><x>`|`Normal`|Close an open NvimTree buffer|
+|`<Space><F>`|`Normal`|Format the buffer according to filetype|
+|`<Space><p>`|`Normal`|Display preview for Markdown files|
 
 Another neat thing that has been achieved here is an integration of `NvimTree` with `Telescope`. This means that LiveGrep, as well as FileSearch can be done very easily in the NvimTree tab, as can be seen in the last four keybindings above. 
