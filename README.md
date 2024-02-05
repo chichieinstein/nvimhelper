@@ -37,7 +37,27 @@ It does the following actions:
 1. Create include and source directories.
 2. Run cmake to create the `compile_commands.json` file required by clangd. 
 
-Run this bash script (after setting execution permissions with `chmod +x setup_project.sh`), passing in the project name and directory. One thing to keep in mind is that as new source files are added/removed, the CmakeLists.txt file needs to be updated, and the cmake command needs to be run again. In order to toggle between different code formatting conventions, it is best to have `clang-format` installed and available.  
+Run this bash script (after setting execution permissions with `chmod +x setup_project.sh`), passing in the project name and directory. One thing to keep in mind is that as new source files are added/removed, the CmakeLists.txt file needs to be updated, and the cmake command needs to be run again. In order to toggle between different code formatting conventions, it is best to have `clang-format` installed and available. 
+
+## Additional notes for CUDA editing:
+
+In case of editing `.cu` files, use `gcc` as the host compiler. Clang has a lot of brittle interdependencies with the CUDA driver. Further, you may need to create a `.clangd` file in your project root and add the following to remove spurious warnings:
+```
+CompileFlags:
+    Remove:
+        - -forward-unknown-to-host-compiler
+        - --generate-code*
+    Add:
+        - -std=c++17
+        - --cuda-path=/usr/local/cuda 
+        - --cuda-gpu-arch=sm_75
+        - -L/usr/local/cuda/lib64
+        - -I/usr/local/cuda/include
+        - -I.
+```
+
+Be sure to correctly include the compute architecture and the C++ version above.
+
 
 # Rust 
 
