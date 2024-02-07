@@ -21,8 +21,8 @@ then
 	echo "project($project_name LANGUAGES CUDA CXX)" >> "$cmake_file"
 	echo "set(CMAKE_CXX_STANDARD 17)" >> "$cmake_file"
 	echo "set(CMAKE_CUDA_STANDARD 17)" >> "$cmake_file"
-	echo "SET(CMAKE_CUDA_FLAGES \x22\x36{CMAKE_CUDA_FLAGS}\x22)"
-	echo "SET(CMAKE_CXX_FLAGS \x22\x36{CMAKE_CXX_FLAGS}\x22)"
+	echo "SET(CMAKE_CUDA_FLAGS \"\${CMAKE_CUDA_FLAGS}\")" >> "$cmake_file"
+	echo "SET(CMAKE_CXX_FLAGS \"\${CMAKE_CXX_FLAGS}\")" >> "$cmake_file"
 
 elif [ "$project_type" == "cxx" ]
 then
@@ -68,7 +68,7 @@ else
         echo "#include <stdio.h>" >> "$project_name.h"
 fi
 
-echo "void display(int);" >> "$project_name.h"
+echo "void display(int);" >> "$project_name.$header_ext"
 
 cd "../src"
 touch "$project_name.$file_ext"
@@ -105,3 +105,18 @@ cd ".."
 cmake -S . -B build
 ln -s build/compile_commands.json .
 
+if [ "$project_type" == "cu" ]
+then 
+	touch ".clangd"
+	echo "CompileFlags:" >> ".clangd"
+	echo "  Remove:" >> ".clangd"
+	echo "    - -forward-unknown-to-host-compiler" >> ".clangd"
+	echo "    - --generate-code*" >> ".clangd"
+	echo "  Add:" >> ".clangd"
+	echo "    - -std=c++17" >> ".clangd"
+	echo "    - --cuda-path=/usr/local/cuda" >> ".clangd"
+	echo "    - --cuda-gpu-arch=sm_75" >> ".clangd"
+	echo "    - -L/usr/local/cuda/lib64" >> ".clangd"
+	echo "    - -I/usr/local/cuda/include" >> ".clangd"
+	echo "    - -I." >> ".clangd"
+fi 
