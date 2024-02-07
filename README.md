@@ -33,16 +33,17 @@ For editing C/C++/CUDA files, we have here an easy way to integrate the Cmake bu
 2. The absolute path of the directory which will contain the project.
 3. The type of project. The possible values are `cxx` for a `.cpp` project, `cu` for a `.cu` project and any other string (even empty) for a `.c` project.
 
-It does the following actions:
+It takes the following actions:
 
 1. Create include and source directories.
-2. Run cmake to create the `compile_commands.json` file required by clangd. 
+2. Run cmake to create the `compile_commands.json` file required by clangd.
+3. For `.cu` projects, create a `.clangd` YAML file to disable spurious diagnostics.
 
-Run this bash script (after setting execution permissions with `chmod +x setup_project.sh`), passing in the project name, directory and optional project type. One thing to keep in mind is that as new source files are added/removed, the CmakeLists.txt file needs to be updated, and the cmake command needs to be run again. In order to toggle between different code formatting conventions, it is best to have `clang-format` installed and available. 
+If you are starting to edit a C project, set execution permissions with `chmod +x setup_project.sh` to this script, and then run it to get a skeletal project, by passing in the project name, directory and optional project type. One thing to keep in mind is that as new source files are added/removed, the CmakeLists.txt file needs to be updated, and the cmake command needs to be run again. In order to toggle between different code formatting conventions, it is best to have `clang-format` installed and available. 
 
 ## Additional notes for CUDA editing:
 
-In case of editing `.cu` files, use `gcc` as the host compiler. Clang has a lot of brittle interdependencies with the CUDA driver. Further, you may need to create a `.clangd` file in your project root and add the following to remove spurious warnings:
+In case of editing `.cu` files, use `gcc` as the host compiler. Clang has a lot of brittle interdependencies with the CUDA driver. Further, you need to create a `.clangd` file in your project root and add the following to remove spurious warnings:
 ```
 CompileFlags:
     Remove:
@@ -57,8 +58,7 @@ CompileFlags:
         - -I.
 ```
 
-Be sure to correctly include the compute architecture and the C++ version above. 
-
+Be sure to correctly include the compute architecture and the C++ version above. The automation script in this repo assumes a compute architecture of 75 by default.
 
 # Rust 
 
