@@ -27,17 +27,18 @@ We next describe the specific language editing features and other requirements i
 
 # C family
 
-For editing C/C++/CUDA files, we have here an easy way to integrate the Cmake build system with the Clangd LSP, mimicking the relationship between rust-analyzer and cargo. The `setup_project.sh` script is included to facilitate this integration by automating the writing of the boiler plate that is needed to directly start using Clangd with Neovim in the project directory. It takes two commandline arguments:
+For editing C/C++/CUDA files, we have here an easy way to integrate the Cmake build system with the Clangd LSP, mimicking the relationship between rust-analyzer and cargo. The `setup_project.sh` script is included to facilitate this integration by automating the writing of the boiler plate that is needed to directly start using Clangd with Neovim in the project directory. It takes these commandline arguments (in this order):
 
 1. The name of the new C/C++/CUDA project.
-2. The directory which will contain the project.
+2. The absolute path of the directory which will contain the project.
+3. The type of project. The possible values are `cxx` for a `.cpp` project, `cu` for a `.cu` project and any other string (even empty) for a `.c` project.
 
 It does the following actions:
 
 1. Create include and source directories.
 2. Run cmake to create the `compile_commands.json` file required by clangd. 
 
-Run this bash script (after setting execution permissions with `chmod +x setup_project.sh`), passing in the project name and directory. One thing to keep in mind is that as new source files are added/removed, the CmakeLists.txt file needs to be updated, and the cmake command needs to be run again. In order to toggle between different code formatting conventions, it is best to have `clang-format` installed and available. 
+Run this bash script (after setting execution permissions with `chmod +x setup_project.sh`), passing in the project name, directory and optional project type. One thing to keep in mind is that as new source files are added/removed, the CmakeLists.txt file needs to be updated, and the cmake command needs to be run again. In order to toggle between different code formatting conventions, it is best to have `clang-format` installed and available. 
 
 ## Additional notes for CUDA editing:
 
@@ -56,7 +57,7 @@ CompileFlags:
         - -I.
 ```
 
-Be sure to correctly include the compute architecture and the C++ version above.
+Be sure to correctly include the compute architecture and the C++ version above. 
 
 
 # Rust 
