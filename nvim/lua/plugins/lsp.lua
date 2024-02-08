@@ -87,6 +87,9 @@ return {
 		require("lspconfig").marksman.setup{
 			capabilities = capabilities	
 		}
+		require("lspconfig").pyright.setup{
+			capabilities = capabilities
+		}
    	end,
 }
 

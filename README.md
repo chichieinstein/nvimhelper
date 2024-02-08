@@ -10,28 +10,51 @@ Welcome to `nvimhelper`, a basic NeoVim config template that illustrates how to 
 7. LiveGrep on folder of choice 
 8. File search on folder of choice 
 
-Currently supported languages are C, C++, CUDA, Rust and Markdown. More languages will be supported in the future. The following general dependencies must be met 
+Currently supported languages are 
+
+1. C, C++, CUDA, 
+2. Rust 
+3. markdown
+4. Python.
+
+More languages will be supported in the future. To start using this config, the following general dependencies must be met 
 
 1. Nvim (version >= 0.10.0, built with LuaJit).
-2. Cmake
-3. Cargo
-4. clang-format
-5. rip-grep
-6. marksman
-7. One of the NerdFonts installed and terminal configured to dispay it.
-8. (Optional) Use a good terminal emulator like `kitty` or `alacritty` for the best rendering of the statuslines.
+2. rip-grep
+3. One of the NerdFonts installed and terminal configured to dispay it.
+4. (Optional) Use a good terminal emulator like `kitty` or `alacritty` for the best rendering of the statuslines.
 
-The setup of required NeoVim plugins is taken care of internally. Once all these dependencies are satisfied, using the config is remarkably simple: copy the nvim folder to your `.config` directory and that is it! Start using nvim with these settings. 
+The setup of required NeoVim plugins is taken care of internally. Once these dependencies are satisfied, using the config is remarkably simple: copy the nvim folder to your `.config` directory and that is it! Start using nvim with these settings. 
 
 We next describe the specific language editing features and other requirements in detail.
 
+# Python 
+For Python editing, we need 
+
+1. Pyright as the LSP 
+2. `black` or `autopep8` as the formatter 
+
+In addition to this, the Python project needs to have a specific structure for Pyright to not complain about there being no `root`. The `setup_project.sh` script helps in creating the required folder structure and the `pyproject.toml` file required by the LSP to start displaying diagnostics. The invocation of the shell script has the following signature
+```
+./setup_project.sh project_name /path/to/parent/folder/of/project py 
+```
+Note that the last argument is `py` to denote a python project. Other possible values of this argument are dealt with in subsequent sections.
+
 # C family
 
-For editing C/C++/CUDA files, we have here an easy way to integrate the Cmake build system with the Clangd LSP, mimicking the relationship between rust-analyzer and cargo. The `setup_project.sh` script is included to facilitate this integration by automating the writing of the boiler plate that is needed to directly start using Clangd with Neovim in the project directory. It takes these commandline arguments (in this order):
+For editing C/C++/CUDA files, we need:
+
+1. Clangd as the LSP
+2. Clang-Format for formatting.
+3. CMake 
+
+Clang-format contained inside clangd is not very configurable and we therefore recommend installing clang-format separately. Further note that if you use the Clang toolchain, these two are already pre-installed. Cmake is necessary, because it provides a good build system, but more importantly for editing purposes, it spits out the `compile_commands.json` file that is needed by `clangd` to start its diagnostics.
+
+The `setup_project.sh` script also facilitates automation of the writing of the boiler plate that is needed to directly start using Clangd with Neovim in the project directory similar to what we did for Python. It takes these commandline arguments (in this order):
 
 1. The name of the new C/C++/CUDA project.
 2. The absolute path of the directory which will contain the project.
-3. The type of project. The possible values are `cxx` for a `.cpp` project, `cu` for a `.cu` project and any other string (even empty) for a `.c` project.
+3. The type of project. The possible values are `cxx` for a `.cpp` project, `cu` for a `.cu` project and empty string for a `.c` project.
 
 It takes the following actions:
 
@@ -58,14 +81,20 @@ CompileFlags:
         - -I.
 ```
 
-Be sure to correctly include the compute architecture and the C++ version above. The automation script in this repo assumes a compute architecture of 75 by default.
+Be sure to correctly include the compute architecture and the C++ version above. The `setup_project.sh` script assumes a compute architecture of 75 by default.
 
 # Rust 
 
-For Rust editing, `cargo` already ships with `rust-analyzer` and `rustfmt`. Enable these in the rust toolchain. Ensure that the `$CARGO_HOME` env variable is set to point to the cargo installation directory of your system.
+For Rust editing, `cargo` already ships with `rust-analyzer` and `rustfmt`. These dependencies must be met for editing Rust with `nvimhelper`
+
+1. Enable `rust-analyzer` and `rustfmt` in the rust toolchain. 
+2. Ensure that the `$CARGO_HOME` env variable is set to point to the cargo installation directory of your system.
 
 # Markdown
-`nvimhelper` enables diagnostics and code completion abilities for markdown, powered by the `marksman` lsp. The config has also been setup to trigger a browser preview of your markdown file. Note that while the lsp provides support to wiki-style links to other `.md` files in your project, the browser preview does not. 
+`nvimhelper` enables diagnostics and code completion abilities for markdown. We need both
+1. `marksman` lsp. 
+2. `markdown preview`
+installed to take full advantage of the capabilities of the config. Note that while the lsp provides support to wiki-style links to other `.md` files in your project, the browser preview does not. 
 
 # Custom keybindings
 
