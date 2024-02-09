@@ -32,6 +32,10 @@ if project_type == "py":
         print("reportMissingImports = true", file=config_file)
         print("pythonVersion = \"3.8\"", file=config_file)
         print("pythonPlatform = \"Linux\"", file=config_file)
+    os.chdir(src_directory)
+    with open("test.py", "w") as main_file:
+        print("if __name__ == \"__main__\":", file=main_file)
+        print(" print(\"HelloWorld\")", file=main_file)
 elif (project_type == 'c' or project_type == 'cxx' or project_type == 'cu'):
     header_directory = os.path.join(project_root, "include")
     os.mkdir(header_directory)
