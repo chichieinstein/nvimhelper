@@ -1,5 +1,5 @@
 # nvimhelper
-Welcome to `nvimhelper`, a basic NeoVim config template that illustrates how to use `Lua` for setting up a terminal based IDE-like environment powered by the NeoVim ecosystem. If you like what you see here, please star :). Supported features include 
+Welcome to `nvimhelper`, a NeoVim config template that uses `Lua` for configuring a terminal based IDE-like environment powered by the NeoVim ecosystem. If you like what you see here, please star :). Supported features include 
 
 1. Code Formatting 
 2. Code completion 
@@ -12,7 +12,7 @@ Welcome to `nvimhelper`, a basic NeoVim config template that illustrates how to 
 
 Currently supported languages are 
 
-1. C, C++, CUDA, 
+1. C, C++, CUDA
 2. Rust 
 3. markdown
 4. Python.
@@ -26,19 +26,19 @@ More languages will be supported in the future. To start using this config, the 
 
 The setup of required NeoVim plugins is taken care of internally. Once these dependencies are satisfied, using the config is remarkably simple: copy the nvim folder to your `.config` directory and that is it! Start using nvim with these settings. 
 
-We next describe the specific language editing features and other requirements in detail.
+We have also provided a python script that automates writing boiler plate code that is required by some LSPs to start working with NeoVim. The usage of this script will be made clear in the relevant sections below, where we deal with the setup of and requirements for each individual language.
 
 # Python 
 For Python editing, we need 
 
-1. Pyright as the LSP 
-2. `black` or `autopep8` as the formatter 
+1. `pyright` as the LSP 
+2. `black` or `autopep8` as the formatter (We choose the latter).
 
-In addition to this, the Python project needs to have a specific structure for Pyright to not complain about there being no `root`. The `setup_project.sh` script helps in creating the required folder structure and the `pyproject.toml` file required by the LSP to start displaying diagnostics. The invocation of the shell script has the following signature
+In addition to this, the Python project needs to have a specific structure for Pyright to not complain about there being no `root`. The `setup_project.py` script helps in creating the required folder structure and the `pyproject.toml` file required by the LSP to start displaying diagnostics. The invocation of the script has the following signature
 ```
-./setup_project.sh project_name /path/to/parent/folder/of/project py 
+python3 setup_project.py project_name py /location/of/root/folder 
 ```
-Note that the last argument is `py` to denote a python project. Other possible values of this argument are dealt with in subsequent sections.
+Here, the first argument is the name of the project, the second argument `py` is the project type, and the third argument is the location of the project root. The convention we follow is that the name of the project root is the same as that of the project. If the third argument is not specfied, the project root will be created in the `HOME` directory. If a relative path is specified (without a leading `/`) then the root would be located in the corresponding subdirectory of the current working directory. If an absolute path is specified, then the root will be located in that directory. 
 
 # C family
 
@@ -50,19 +50,22 @@ For editing C/C++/CUDA files, we need:
 
 Clang-format contained inside clangd is not very configurable and we therefore recommend installing clang-format separately. Further note that if you use the Clang toolchain, these two are already pre-installed. Cmake is necessary, because it provides a good build system, but more importantly for editing purposes, it spits out the `compile_commands.json` file that is needed by `clangd` to start its diagnostics.
 
-The `setup_project.sh` script also facilitates automation of the writing of the boiler plate that is needed to directly start using Clangd with Neovim in the project directory similar to what we did for Python. It takes these commandline arguments (in this order):
+The `setup_project.py` script facilitates automation of the writing of the boiler plate here too. The invocation of this script takes the form:
 
-1. The name of the new C/C++/CUDA project.
-2. The absolute path of the directory which will contain the project.
-3. The type of project. The possible values are `cxx` for a `.cpp` project, `cu` for a `.cu` project and empty string for a `.c` project.
+```
+python3 setup_project.py project_name c /location/of/root/folder   -------------  For c projects 
+python3 setup_project.py project_name cxx /location/of/root/folder -------------  For cpp projects 
+python3 setup_project.py project_name cu /location/of/root/folder  -------------  For cuda projects
+```
+The structure of the third argument dealing with the location of the project root is the same as the one we saw for Python.
 
-It takes the following actions:
+The script takes the following actions:
 
 1. Create include and source directories.
 2. Run cmake to create the `compile_commands.json` file required by clangd.
 3. For `.cu` projects, create a `.clangd` YAML file to disable spurious diagnostics.
 
-If you are starting to edit a C project, set execution permissions with `chmod +x setup_project.sh` to this script, and then run it to get a skeletal project, by passing in the project name, directory and optional project type. One thing to keep in mind is that as new source files are added/removed, the CmakeLists.txt file needs to be updated, and the cmake command needs to be run again. In order to toggle between different code formatting conventions, it is best to have `clang-format` installed and available. 
+One thing to keep in mind is that as new source files are added/removed, the CmakeLists.txt file needs to be updated, and the cmake command needs to be run again. In order to toggle between different code formatting conventions, it is best to have `clang-format` installed and available. 
 
 ## Additional notes for CUDA editing:
 
@@ -81,7 +84,7 @@ CompileFlags:
         - -I.
 ```
 
-Be sure to correctly include the compute architecture and the C++ version above. The `setup_project.sh` script assumes a compute architecture of 75 by default.
+Be sure to correctly include the compute architecture and the C++ version above. The `setup_project.py` script assumes a compute architecture of 75 by default.
 
 # Rust 
 
