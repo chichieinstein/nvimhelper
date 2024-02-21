@@ -65,7 +65,7 @@ The script takes the following actions:
 2. Run cmake to create the `compile_commands.json` file required by clangd.
 3. For `.cu` projects, create a `.clangd` YAML file to disable spurious diagnostics.
 
-One thing to keep in mind is that as new source files are added/removed, the CmakeLists.txt file needs to be updated, and the cmake command needs to be run again. In order to toggle between different code formatting conventions which is allowed by the clang-formatter. The config here has a neovim plugin installed that makes this toggling between conventions easy.
+One thing to keep in mind is that as new source files are added/removed, the CmakeLists.txt file needs to be updated, and the cmake command needs to be run again. Finally, the config here has a neovim plugin installed that makes toggling between coding conventions easy without the need to geenrate a .clang-format file.
 
 ## Additional notes for CUDA editing:
 
