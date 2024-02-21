@@ -48,14 +48,14 @@ For editing C/C++/CUDA files, we need:
 2. Clang-Format for formatting.
 3. CMake 
 
-Clang-format contained inside clangd is not very configurable and we therefore recommend installing clang-format separately. Further note that if you use the Clang toolchain, these two are already pre-installed. Cmake is necessary, because it provides a good build system, but more importantly for editing purposes, it spits out the `compile_commands.json` file that is needed by `clangd` to start its diagnostics.
+Note that if you use the Clang toolchain, these clangd and clang-format are already pre-installed. Cmake is necessary, because it provides a good build system, but more importantly for editing purposes, it spits out the `compile_commands.json` file that is needed by `clangd` to start its diagnostics.
 
 The `setup_project.py` script facilitates automation of the writing of the boiler plate here too. The invocation of this script takes the form:
 
 ```
-python3 setup_project.py project_name c /location/of/root/folder   -------------  For c projects 
-python3 setup_project.py project_name cxx /location/of/root/folder -------------  For cpp projects 
-python3 setup_project.py project_name cu /location/of/root/folder  -------------  For cuda projects
+python3 setup_project.py project_name c /location/of/root/folder    (For c projects) 
+python3 setup_project.py project_name cxx /location/of/root/folder  (For cpp projects) 
+python3 setup_project.py project_name cu /location/of/root/folder   (For cuda projects)
 ```
 The structure of the third argument dealing with the location of the project root is the same as the one we saw for Python.
 
@@ -65,7 +65,7 @@ The script takes the following actions:
 2. Run cmake to create the `compile_commands.json` file required by clangd.
 3. For `.cu` projects, create a `.clangd` YAML file to disable spurious diagnostics.
 
-One thing to keep in mind is that as new source files are added/removed, the CmakeLists.txt file needs to be updated, and the cmake command needs to be run again. In order to toggle between different code formatting conventions, it is best to have `clang-format` installed and available. 
+One thing to keep in mind is that as new source files are added/removed, the CmakeLists.txt file needs to be updated, and the cmake command needs to be run again. In order to toggle between different code formatting conventions which is allowed by the clang-formatter. The config here has a neovim plugin installed that makes this toggling between conventions easy.
 
 ## Additional notes for CUDA editing:
 
