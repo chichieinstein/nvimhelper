@@ -13,16 +13,17 @@ Welcome to `nvimhelper`, a NeoVim config template that uses `Lua` for configurin
 Currently supported languages are 
 
 1. C, C++, CUDA
-2. Rust 
-3. markdown
-4. Python.
+2. Rust
+3. Python 
+4. markdown
+5. LaTeX
 
 More languages will be supported in the future. To start using this config, the following general dependencies must be met 
 
 1. Nvim (version >= 0.10.0, built with LuaJit).
 2. rip-grep
 3. One of the NerdFonts installed and terminal configured to dispay it.
-4. (Optional) Use a good terminal emulator like `kitty` or `alacritty` for the best rendering of the statuslines.
+4. (Optional) Use a good terminal emulator like `kitty` or `alacritty` for the best rendering of the statuslines. This is not really needed if you are using Ubuntu 22.04 or later.
 
 The setup of required NeoVim plugins is taken care of internally. Once these dependencies are satisfied, using the config is remarkably simple: copy the nvim folder to your `.config` directory and that is it! Start using nvim with these settings. 
 
@@ -98,6 +99,13 @@ For Rust editing, `cargo` already ships with `rust-analyzer` and `rustfmt`. Thes
 1. `marksman` lsp. 
 2. `markdown preview`
 installed to take full advantage of the capabilities of the config. Note that while the lsp provides support to wiki-style links to other `.md` files in your project, the browser preview does not. 
+
+# LaTeX 
+`nvimhelper` also has the capability to edit LaTeX files. As before, we need an LSP and a TeX compiler to get this working. Accordingly,
+1. `TeXLab` is our LaTeX lsp 
+2. `Tectonic` is our LaTex compiler.
+
+Having had a lot of experience with the bulk and difficulty of installing various TeX distributions, I can vouch for how simple `Tectonic` has made managing large Latex projects. Both the LSP and compiler are quite easy to install and `Tectonic` only installs packages as and when they are needed. Thus the overall bulk of the distribution is reduced. Handling bibiliographies is also a breeze with these tools.
 
 # Custom keybindings
 
