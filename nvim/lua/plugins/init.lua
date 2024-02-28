@@ -8,6 +8,7 @@ local directtree = require "plugins.tree"
 local colorscheme = require "plugins.tokyonight"
 local lines = require "plugins.statusline"
 local preview = require "plugins.preview"
-local config = merge_tb("force", lsps, formatters, telescope, parser, directtree, lines, preview, colorscheme)
+local tex = require "plugins.tex"
+local config = merge_tb("force", lsps, formatters, telescope, parser, directtree, lines, preview, colorscheme, tex)
 
 return config

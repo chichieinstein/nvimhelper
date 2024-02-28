@@ -99,6 +99,9 @@ function Map(mode, lhs, rhs, opts)
 local builtin = require("telescope.builtin")
 local treelib = require("nvim-tree.lib")
 
+-- Configure vimTex to use tectonic 
+vim.g.vimtex_compiler_method = 'tectonic'
+
 -- Find files in current directory (ff - find files)
 Map("n", "<leader>ff", builtin.find_files, {})
 
