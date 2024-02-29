@@ -135,6 +135,11 @@ Map("n", "<A-w>", "<C-w>v")
 Map("n", "<C-h>", "<C-w>h")
 Map("n", "<C-l>", "<C-w>l")
 
+-- Setup commands to interact with system clipboard
+Map('n', '<leader>y', '"+y')
+Map('n', '<leader>p', '"+p')
+Map('v', '<leader>y', '"+y')
+Map('v', '<leader>p', '"+p')
 
 
 
