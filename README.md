@@ -24,7 +24,8 @@ More languages will be supported in the future. To start using this config, the 
 2. rip-grep
 3. One of the NerdFonts installed and terminal configured to dispay it.
 4. (Optional) Use a good terminal emulator like `kitty` or `alacritty` for the best rendering of the statuslines. This is not really needed if you are using Ubuntu 22.04 or later.
-5. xsel or xclip 
+5. xsel or xclip
+6. tmux 
 
 The setup of required NeoVim plugins is taken care of internally. Once these dependencies are satisfied, using the config is remarkably simple: copy the nvim folder to your `.config` directory and that is it! Start using nvim with these settings. 
 
@@ -128,5 +129,7 @@ Having had a lot of experience with the bulk and difficulty of installing variou
 |`<Space><x>`|`Normal`|Close an open NvimTree buffer|
 
 Note that nvimhelper enables interaction with the system clipboard. Thus, you can copy text from anywhere, then press `<leader>p` to paste the selected text onto your neovim buffer. Similarly, you can use `<leader>y`to copy text from your current neovim buffer, following which a Ctrl+V onto the other application will paste your selected text to the destination!
+
+Included here is also a tmux config file. Rename it to `.tmux.conf` and place it in root directory to start using tmux with these settings.
 
 Another neat thing that has been achieved here is an integration of `NvimTree` with `Telescope`. This means that LiveGrep, as well as FileSearch can be done very easily in the NvimTree tab, as can be seen in the last four keybindings above. 
