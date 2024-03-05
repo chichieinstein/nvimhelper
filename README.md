@@ -108,7 +108,7 @@ For Rust editing, `cargo` already ships with `rust-analyzer` and `rustfmt`. Thes
 2. Ensure that the `$CARGO_HOME` env variable is set to point to the cargo installation directory of your system.
 
 ## Markdown
-`nvimhelper` enables diagnostics and code completion abilities for markdown. We need both
+`dev_config` enables diagnostics and code completion abilities for markdown. We need both
 1. `marksman` lsp. 
 2. `markdown preview`
 installed to take full advantage of the capabilities of the config. Note that while the lsp provides support to wiki-style links to other `.md` files in your project, the browser preview does not. 
@@ -116,7 +116,7 @@ installed to take full advantage of the capabilities of the config. Note that wh
 # Ndev Config 
 The non-development config supports Latex and Markdown. The requirements for the latter are the same as in the previous config. 
 ## LaTeX 
-`nvimhelper` also has the capability to edit LaTeX files. As before, we need an LSP and a TeX compiler to get this working. Accordingly,
+`ndev-config` provides the capability to edit LaTeX files. As before, we need an LSP and a TeX compiler to get this working. Accordingly,
 1. `TeXLab` is our LaTeX lsp 
 2. `Tectonic` is our LaTex compiler.
 
