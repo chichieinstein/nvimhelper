@@ -32,14 +32,27 @@ Optional dependencies
 1. tmux 
 2. `kitty` or `alacritty` if you are using older Ubuntu versions. For 22.04 and later, statuslines are rendered perfectly by the default terminal after Nerfonts are installed.
 
-The setup of required NeoVim plugins is taken care of internally. To start using the configs, clone the repo, and then set the `XDG_CONFIG_HOME` variable as follows 
+The setup of required NeoVim plugins is taken care of internally. 
+
+## Usage instructions for local development
+Clone the repo, copy both `dev_config` and `ndev_config` to your `.config` directory, and then set the `NVIM_APPNAME` variable as follows 
 
 | Requirement | Command to run |
 |-------------|-----------------|
-| Develop software and write Markdown documentation | `export XDG_CONFIG_HOME=/path/to/nvimhelper/dev_config` |
-| Edit Latex and Markdown files for non-dev purposes | `export XDG_CONFIG_HOME=/path/to/nvimhelper/ndev_config` |
+| Develop software and write Markdown documentation | `export NVIM_APPNAME=dev_config/nvim` |
+| Edit Latex and Markdown files for non-dev purposes | `export NVIM_APPNAME=ndev_config/nvim` |
 
-You are set afterwards. Please look at the subsequent sections to install config specific requirements.
+You can also enter these statements in your `.bashrc` profile for a more permanent setting, and modify it to toggle between the configs. 
+
+## Usage instructions for container development 
+If you are developing in a docker environment, ensure to set `XDG_CONFIG_HOME` to a sensible default (e.g., create a `.config` in container and set the variable to `$HOME/.config`). Then, you can simply load the configs as a shared volume inside this folder and in your dockerfile, write 
+
+| Requirement | Command to run |
+|-------------|-----------------|
+| Develop software and write Markdown documentation | `ENV NVIM_APPNAME=dev_config/nvim` |
+| Edit Latex and Markdown files for non-dev purposes | `ENV NVIM_APPNAME=ndev_config/nvim` |
+
+Please read the subsequent sections for a summary of config specific requirements.
 # Dev Config 
 The dev config currently supports Python, Rust, C and Markdown editing. Just install requirements for whichever language you are interested in and start editing.
 ## Python 
@@ -123,7 +136,6 @@ The non-development config supports Latex and Markdown. The requirements for the
 Having had a lot of experience with the bulk and difficulty of installing various TeX distributions, I can vouch for how simple `Tectonic` has made managing large Latex projects. Both the LSP and compiler are quite easy to install and `Tectonic` only installs packages as and when they are needed. Thus the overall bulk of the distribution is reduced. Handling bibiliographies is also a breeze with these tools.
 
 # Custom keybindings
-
 |   Keys    |     Mode  |Action               |
 |-----------|----------|---------------------|
 |`<Alt><w>`|`Normal`|Open Split Window to the right |   
