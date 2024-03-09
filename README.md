@@ -153,7 +153,7 @@ Having had a lot of experience with the bulk and difficulty of installing variou
 |`<Space><tt>`|`Normal`|LiveGrep under cursor in NvimTree buffer|
 |`<Space><x>`|`Normal`|Close an open NvimTree buffer|
 
-Note that nvimhelper enables interaction with the system clipboard. Thus, you can copy text from anywhere, then press `<leader>p` to paste the selected text onto your neovim buffer. Similarly, you can use `<leader>y`to copy text from your current neovim buffer, following which a Ctrl+V onto the other application will paste your selected text to the destination!
+Note that nvimhelper enables interaction with the system clipboard. Thus, you can copy text from anywhere, then press `<leader>p` to paste the selected text onto your neovim buffer. Similarly, you can use `<leader>y`to copy text from your current neovim buffer, following which a Ctrl+V onto the other application will paste your selected text to the destination! Neovim needs `$DISPLAY` to be set in order to interact with the system clipboard. So if you are developing in a headless/gui-less environment and do not want to set this variable, then the clipboard integrations won't work for you.
 
 Included here is also a tmux config file. Rename it to `.tmux.conf` and place it in root directory to start using tmux with these settings.
 
