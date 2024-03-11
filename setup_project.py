@@ -42,7 +42,7 @@ elif (project_type == 'c' or project_type == 'cxx' or project_type == 'cu'):
     file_ext = "cpp" if project_type == 'cxx' else project_type
     header_ext = 'cuh' if project_type == 'cu' else 'h'
     with open("CMakeLists.txt", "w") as cmake_file:
-        print("cmake_minimum_required(VERSION 3.10)", file=cmake_file)
+        print("cmake_minimum_required(VERSION 3.13)", file=cmake_file)
         if project_type == "c":
             print(f"project({project_name})", file=cmake_file)
         elif project_type == "cxx":
@@ -52,24 +52,18 @@ elif (project_type == 'c' or project_type == 'cxx' or project_type == 'cu'):
             print(
                 f"project({project_name} LANGUAGES CUDA CXX)",
                 file=cmake_file)
+            print("find_package(CUDA REQUIRED)", file=cmake_file)
             print(f"set(CMAKE_CXX_STANDARD 17)", file=cmake_file)
             print(f"set(CMAKE_CUDA_STANDARD 17)", file=cmake_file)
             print(
-                "SET(CMAKE_CUDA_FLAGS\"${CMAKE_CUDA_FLAGS}\")",
+                "set(CMAKE_CUDA_FLAGS\"${CMAKE_CUDA_FLAGS}\")",
                 file=cmake_file)
             print(
-                "SET(CMAKE_CXX_FLAGS\"${CMAKE_CXX_FLAGS}\")",
+                "set(CMAKE_CXX_FLAGS\"${CMAKE_CXX_FLAGS}\")",
                 file=cmake_file)
+            print("set(CMAKE_CUDA_ARCHITECTURES 75)", file=cmake_file)
         print("set(CMAKE_EXPORT_COMPILE_COMMANDS ON)", file=cmake_file)
-        print(f"add_executable({project_name})", file=cmake_file)
-        print(
-            f"target_sources({project_name} PRIVATE ./src/{project_name}.{file_ext} ./src/main.{file_ext})",
-            file=cmake_file)
-        if project_type == 'cu':
-            print(
-                f"set_property(TARGET {project_name} PROPERTY CUDA_ARCHITECTURES 75)",
-                file=cmake_file)
-            print("find_package(CUDA)", file=cmake_file)
+        print("add_subdirectory(src)", file=cmake_file)
     os.chdir(header_directory)
     with open(f"{project_name}.{header_ext}", "w") as header_file:
         if project_type != 'c':
@@ -78,20 +72,24 @@ elif (project_type == 'c' or project_type == 'cxx' or project_type == 'cu'):
             print("#include <stdio.h>", file=header_file)
         print("void display(int);", file=header_file)
     os.chdir(src_directory)
-    with open(f"{project_name}.{file_ext}", "w") as src_file:
+    with open("CMakeLists.txt", "w") as cmake_file:
+        print(f"add_executable({project_name}_main)", file=cmake_file)
         print(
-            f"#include\"../include/{project_name}.{header_ext}\"",
-            file=src_file)
+            f"target_include_directories({project_name}_main PUBLIC ${{PROJECT_SOURCE_DIR}}/include)", file=cmake_file)
+        print(
+            f"target_sources({project_name}_main PUBLIC {project_name}.{file_ext} main.{file_ext})", file=cmake_file)
+    with open(f"{project_name}.{file_ext}", "w") as src_file:
+        print(f"#include \"{project_name}.{header_ext}\"", file=src_file)
         if project_type != "c":
             print("using std::cout;\nusing std::endl;", file=src_file)
         print("void display(int x)\n{", file=src_file)
         if project_type != "c":
             print(" cout << x << endl;\n}", file=src_file)
         else:
-            print(" printf(\"%d\\n\", x);"+"\n}", file=src_file)
+            print(" printf(\"%d\\n\", x);" + "\n}", file=src_file)
     with open(f"main.{file_ext}", "w") as main_file:
         print(
-            f"#include \"../include/{project_name}.{header_ext}\"",
+            f"#include \"{project_name}.{header_ext}\"",
             file=main_file)
         print("int main()\n{", file=main_file)
         print(" int z=5;", file=main_file)
