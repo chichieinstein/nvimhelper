@@ -1,0 +1,7 @@
+{
+    <libcuda>
+    Memcheck:Leak
+    ...
+    obj:/usr/*lib*/libcuda*
+    ...
+}
